@@ -1,0 +1,90 @@
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import {
+  LogOutIcon,
+  RotateCcwClock,
+  ScrollText,
+  Search,
+  SquareMenu,
+} from "lucide-react"
+import { Button } from "./ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet"
+import { Link } from "react-router"
+
+interface HeaderProps {
+  setSearchQuery?: (val: string) => void
+}
+
+export const Header = ({ setSearchQuery }: HeaderProps) => {
+  return (
+    <header className="top-0 z-10 flex w-full shrink-0 items-center justify-between bg-gray-100 p-4 shadow-2xl">
+      <div className="flex items-center justify-center gap-1">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button size="icon">
+              <SquareMenu />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle>Settings</SheetTitle>
+              <SheetDescription></SheetDescription>
+            </SheetHeader>
+            <div className="p-4">
+              <Link to="/home">
+                <Button className="w-full">
+                  <ScrollText />
+                  <p>Product List</p>
+                </Button>
+              </Link>
+              <Link to="/orders">
+                <Button className="w-full">
+                  <RotateCcwClock />
+                  <p>Order History</p>
+                </Button>
+              </Link>
+            </div>
+
+            <SheetFooter>
+              <Link to="/">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                >
+                  <LogOutIcon />{" "}
+                </Button>
+              </Link>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+        <h2>Lavish Shawarma</h2>
+      </div>
+
+      {setSearchQuery && (
+        <div className="flex items-center justify-center gap-2">
+          <InputGroup className="max-w-xs">
+            <InputGroupInput
+              placeholder="Search..."
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
+      )}
+    </header>
+  )
+}
