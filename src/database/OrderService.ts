@@ -12,15 +12,13 @@ export const saveOrder = async (items: Record<string, Item>) => {
     0
   )
   try {
-    const orderId = await db.order.add({
+    await db.order.add({
       items: items,
       totalPrice,
       quantity,
-      createdAt: Date.now().toString(),
-      updatedAt: Date.now().toString(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     })
-
-    alert("Order saved " + orderId)
   } catch (error) {
     console.error(error)
   }
@@ -43,7 +41,7 @@ export const editOrder = async (
       items: items,
       totalPrice,
       quantity,
-      updatedAt: Date.now().toString(),
+      updatedAt: new Date(),
     })
 
     alert("Order updated " + orderId)

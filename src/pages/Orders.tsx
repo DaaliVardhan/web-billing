@@ -2,7 +2,7 @@ import { Header } from "@/components/Header"
 import { motion } from "framer-motion"
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "@/database/db"
-import { DataTable } from "@/tables/orders/data-table"
+import { DataTable } from "@/tables/data-table"
 import { columns } from "@/tables/orders/column"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useState } from "react"
@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import type { DateRange } from "react-day-picker"
 import { Calendar } from "@/components/ui/calendar"
-import { addDays, isWithinInterval } from "date-fns"
+import { addDays, compareDesc, isWithinInterval } from "date-fns"
+import { SectionCards } from "@/components/SalesCards"
 
 const Orders = () => {
   const [seletedToggle, setSelectedToggle] = useState("0")
@@ -68,13 +69,14 @@ const Orders = () => {
       className="flex h-dvh flex-col"
     >
       <Header />
+      {orders && <SectionCards orders={orders!} />}
       <div className="container mx-auto py-10">
         <ToggleGroup
           type="single"
           value={seletedToggle}
           onValueChange={setSelectedToggle}
           variant="outline"
-          defaultValue="all"
+          defaultValue="today"
           className="flex flex-wrap py-4 *:data-[slot=toggle-group-item]:px-4!"
         >
           <ToggleGroupItem value="all">All</ToggleGroupItem>
@@ -122,7 +124,12 @@ const Orders = () => {
             </DropdownMenu>
           </ToggleGroupItem>
         </ToggleGroup>
-        {orders && <DataTable columns={columns} data={orders!} />}
+        {orders && (
+          <DataTable
+            columns={columns}
+            data={orders.sort((a, b) => compareDesc(a.createdAt, b.createdAt))!}
+          />
+        )}
       </div>
     </motion.main>
   )

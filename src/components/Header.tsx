@@ -43,15 +43,21 @@ export const Header = ({ setSearchQuery }: HeaderProps) => {
             </SheetHeader>
             <div className="p-4">
               <Link to="/home">
-                <Button className="w-full">
+                <Button variant="navigation" className="w-full">
                   <ScrollText />
                   <p>Product List</p>
                 </Button>
               </Link>
               <Link to="/orders">
-                <Button className="w-full">
+                <Button variant="navigation" className="w-full">
                   <RotateCcwClock />
                   <p>Order History</p>
+                </Button>
+              </Link>
+              <Link to="/menus">
+                <Button variant="navigation" className="w-full">
+                  <RotateCcwClock />
+                  <p>Menu Management</p>
                 </Button>
               </Link>
             </div>

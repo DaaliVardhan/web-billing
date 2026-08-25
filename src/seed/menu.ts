@@ -19,4 +19,8 @@ export const menus = [
     id: 'drinks',
     name: "Drinks",
   },
+  {
+    id: 'add-ons',
+    name: "Add-on",
+  }
 ];

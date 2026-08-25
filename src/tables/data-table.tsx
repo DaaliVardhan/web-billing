@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/table"
 
 import { features, type DataTableFeatures } from "@/utils/data-table-features"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[]
@@ -27,7 +29,7 @@ export function DataTable<TData extends RowData>({
   })
 
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className="overflow-auto rounded-md border">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -67,6 +69,31 @@ export function DataTable<TData extends RowData>({
           )}
         </TableBody>
       </Table>
+      <div className="p-4">
+        <div className="flex w-fit items-center justify-center text-sm font-medium">
+          Page {table.state.pagination.pageIndex + 1} of {table.getPageCount()}
+        </div>
+        <div className="ml-auto flex items-center justify-end gap-2 lg:ml-0">
+          <Button
+            className="size-8"
+            size="icon"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <span className="sr-only">Go to previous page</span>
+            <ArrowLeft />
+          </Button>
+          <Button
+            className="size-8"
+            size="icon"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            <span className="sr-only">Go to next page</span>
+            <ArrowRight />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table"
 import { type DataTableFeatures } from "@/utils/data-table-features"
 import type { Item, Order } from "@/types"
-import { ActionDropDown } from "@/components/ActionDropDown"
+import { ActionDropDown } from "@/tables/orders/ActionDropDown"
 
 
 const columnHelper = createColumnHelper<DataTableFeatures, Order>()
@@ -44,7 +44,7 @@ export const columns = columnHelper.columns([
   columnHelper.accessor("createdAt", {
     header: () => <div className="text-right">Date</div>,
     cell: ({ row }) => {
-      const datetime = Number(row.getValue("createdAt"))
+      const datetime = row.getValue("createdAt") as Date
       const date = new Date(datetime)
       return (
         <div className="text-right font-medium">
@@ -61,7 +61,7 @@ export const columns = columnHelper.columns([
     id: "Time",
     header: () => <div className="text-right">Ordered At</div>,
     cell: ({ row }) => {
-      const datetime = Number(row.getValue("createdAt"))
+      const datetime = row.getValue("createdAt") as Date
       const date = new Date(datetime)
       return (
         <div className="text-right font-medium">

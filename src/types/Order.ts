@@ -5,6 +5,6 @@ export interface Order {
     items: Record<string, Item>,
     quantity: number,
     totalPrice: number,
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
