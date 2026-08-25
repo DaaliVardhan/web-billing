@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header"
 import MenuForm from "@/components/MenuForm"
 import { Button } from "@/components/ui/button"
-import type { Menu } from "@/types"
 import {
   Dialog,
   DialogClose,
@@ -23,7 +22,7 @@ import { motion } from "framer-motion"
 import { Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const Menu = () => {
+const MenuPage = () => {
   const menus = useLiveQuery(() => db.menu.orderBy("order").toArray())
   const open = useMenuStore((state) => state.openDialog)
   const setOpen = useMenuStore((state) => state.setOpenDialog)
@@ -128,4 +127,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export default MenuPage

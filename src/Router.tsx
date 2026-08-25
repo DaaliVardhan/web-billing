@@ -4,7 +4,7 @@ import App from "./pages/App"
 import Orders from "./pages/Orders"
 import ErrorPage from "./pages/ErrorPage"
 import SomethingWentWrong from "./pages/SomethingWentWrong"
-import Menu from "./pages/Menu"
+import MenuPage from "./pages/Menu"
 
 export const router = createHashRouter([
   {
@@ -24,7 +24,7 @@ export const router = createHashRouter([
   },
   {
     path: "/menus",
-    element: <Menu />,
+    element: <MenuPage />,
     errorElement: <SomethingWentWrong />,
   },
   {
