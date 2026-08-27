@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client"
 import { ThemeProvider } from "@/components/theme-provider.tsx"
 import { AnimatePresence } from "framer-motion"
 import { RouterProvider } from "react-router"
+import { Toaster } from "@/components/ui/sonner"
 import { router } from "./Router"
 import "./index.css"
 
@@ -11,6 +12,7 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider defaultTheme="light">
       <AnimatePresence mode="wait">
         <RouterProvider router={router} />
+        <Toaster />
       </AnimatePresence>
     </ThemeProvider>
   </StrictMode>
