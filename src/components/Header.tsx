@@ -75,7 +75,23 @@ export const Header = ({ setSearchQuery }: HeaderProps) => {
             </SheetFooter>
           </SheetContent>
         </Sheet>
-        <h2>Lavish Shawarma</h2>
+        <div className="hidden sm:flex gap-2">
+          <Link to="/home">
+            <Button variant="outline">
+              <h2>Lavish Shawarma</h2>
+            </Button>
+          </Link>
+          <Link to="/orders">
+            <Button variant="outline">
+              <h2>Orders</h2>
+            </Button>
+          </Link>
+          <Link to="/menus">
+            <Button variant="outline">
+              <h2>Menu</h2>
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {setSearchQuery && (

@@ -1,10 +1,9 @@
-import { motion } from "framer-motion"
 import { useDeferredValue, useState } from "react"
-import { Header } from "@/components/Header"
 import ProductList from "@/components/ProductList"
 import Footer from "@/components/Footer"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { menus } from "@/seed"
+import Layout from "./Layout"
 
 function App() {
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null)
@@ -12,14 +11,7 @@ function App() {
   const query = useDeferredValue(search)
 
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="flex h-dvh flex-col"
-    >
-      <Header setSearchQuery={(val) => setSearch(val)} />
+    <Layout setSearch={(val) => setSearch(val)}>
       <div className="flex flex-row items-center justify-start gap-2 p-2 sm:p-4 lg:p-4 w-full overflow-x-auto">
         <ToggleGroup variant="outline" type="single" defaultValue="all">
           {menus.map((menu) => (
@@ -40,7 +32,7 @@ function App() {
         <ProductList query={query} selectedMenu={selectedMenu} />
       </main>
       <Footer />
-    </motion.main>
+    </Layout>
   )
 }
 

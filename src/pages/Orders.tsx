@@ -1,5 +1,3 @@
-import { Header } from "@/components/Header"
-import { motion } from "framer-motion"
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "@/database/db"
 import { DataTable } from "@/tables/data-table"
@@ -16,24 +14,16 @@ import type { DateRange } from "react-day-picker"
 import { Calendar } from "@/components/ui/calendar"
 import { addDays, compareDesc, isWithinInterval } from "date-fns"
 import { SectionCards } from "@/components/SalesCards"
+import Layout from "./Layout"
 
 const Orders = () => {
-  const [seletedToggle, setSelectedToggle] = useState("0")
+  const [seletedToggle, setSelectedToggle] = useState("today")
   const [dateRange, setDateRange] = useState<DateRange | undefined>()
   const [currentMonth, setCurrentMonth] = useState<Date>(
     new Date(new Date().getFullYear(), new Date().getMonth(), 1)
   )
   const orders = useLiveQuery(() => {
     switch (seletedToggle) {
-      case "today": {
-        return db.order
-          .filter(
-            (ord) =>
-              new Date().toDateString() ===
-              new Date(Number(ord.createdAt)).toDateString()
-          )
-          .toArray()
-      }
       case "yesterday": {
         return db.order
           .filter(
@@ -55,22 +45,22 @@ const Orders = () => {
           )
           .toArray()
       }
+      case "today":
       default: {
-        return db.order.toArray()
+        return db.order
+          .filter(
+            (ord) =>
+              new Date().toDateString() ===
+              new Date(Number(ord.createdAt)).toDateString()
+          )
+          .toArray()
       }
     }
   }, [seletedToggle, dateRange])
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="flex h-dvh flex-col"
-    >
-      <Header />
+    <Layout>
       {orders && <SectionCards orders={orders!} />}
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto px-4 py-10">
         <ToggleGroup
           type="single"
           value={seletedToggle}
@@ -79,12 +69,14 @@ const Orders = () => {
           defaultValue="today"
           className="flex flex-wrap py-4 *:data-[slot=toggle-group-item]:px-4!"
         >
-          <ToggleGroupItem value="all">All</ToggleGroupItem>
           <ToggleGroupItem value="today">Today</ToggleGroupItem>
           <ToggleGroupItem value="yesterday">Yesterday</ToggleGroupItem>
           <ToggleGroupItem value="custom">
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger
+                asChild
+                onClick={() => setSelectedToggle("custom")}
+              >
                 <span className="flex items-center gap-1">
                   <CalendarIcon /> Customize{" "}
                   {
@@ -124,6 +116,7 @@ const Orders = () => {
             </DropdownMenu>
           </ToggleGroupItem>
         </ToggleGroup>
+
         {orders && (
           <DataTable
             columns={columns}
@@ -131,7 +124,7 @@ const Orders = () => {
           />
         )}
       </div>
-    </motion.main>
+    </Layout>
   )
 }
 

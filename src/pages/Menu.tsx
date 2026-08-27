@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header"
 import MenuForm from "@/components/MenuForm"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,9 +17,9 @@ import { DataTable } from "@/tables/data-table"
 import { columns } from "@/tables/menus/column"
 import { useMenuStore } from "@/zustand/state"
 import { useLiveQuery } from "dexie-react-hooks"
-import { motion } from "framer-motion"
 import { Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Layout from "./Layout"
 
 const MenuPage = () => {
   const menus = useLiveQuery(() => db.menu.orderBy("order").toArray())
@@ -77,15 +76,8 @@ const MenuPage = () => {
   }
 
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="flex h-dvh flex-col"
-    >
-      <Header />
-      <div className="container mx-auto py-10">
+    <Layout>
+      <div className="container mx-auto py-10 px-4">
         <Dialog open={open} onOpenChange={setOpen}>
           <form>
             <DialogTrigger asChild>
@@ -110,7 +102,11 @@ const MenuPage = () => {
                   <Button
                     type="submit"
                     disabled={!isValidMenu}
-                    className={cn('', !isValidMenu && 'opacity-50 cursor-not-allowed', deleteMode && 'bg-red-500 hover:bg-red-600')}
+                    className={cn(
+                      "",
+                      !isValidMenu && "cursor-not-allowed opacity-50",
+                      deleteMode && "bg-red-500 hover:bg-red-600"
+                    )}
                     onClick={handleSave}
                   >
                     {renderSaveButtonText()}
@@ -123,7 +119,7 @@ const MenuPage = () => {
 
         {menus && <DataTable columns={columns} data={menus!} />}
       </div>
-    </motion.main>
+    </Layout>
   )
 }
 
