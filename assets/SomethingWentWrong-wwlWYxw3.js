@@ -1,0 +1,1 @@
+import{p as e}from"./index-BtIXandy.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`SomethingWentWrong`});export{n as default};
