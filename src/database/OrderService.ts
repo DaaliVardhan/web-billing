@@ -1,9 +1,9 @@
-import type { Item } from "@/types"
+import type { Item, OrderType } from "@/types"
 import { db } from "./db"
 import { fallbackToZero } from "@/utils"
 import { toast } from "sonner"
 
-export const saveOrder = async (items: Record<string, Item>) => {
+export const saveOrder = async (items: Record<string, Item>, type?: OrderType) => {
   try {
     const quantity = Object.values(items).reduce(
       (acc, item) => acc + fallbackToZero(item.quantity),
@@ -17,6 +17,7 @@ export const saveOrder = async (items: Record<string, Item>) => {
       items: items,
       totalPrice,
       quantity,
+      type : type || "Dining",
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -29,7 +30,8 @@ export const saveOrder = async (items: Record<string, Item>) => {
 
 export const editOrder = async (
   orderId: number,
-  items: Record<string, Item>
+  items: Record<string, Item>,
+  orderType?: OrderType
 ) => {
   try {
     const quantity = Object.values(items).reduce(
@@ -44,6 +46,7 @@ export const editOrder = async (
       items: items,
       totalPrice,
       quantity,
+      type: orderType || "Dining",
       updatedAt: new Date(),
     })
 

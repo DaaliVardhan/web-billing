@@ -1,4 +1,4 @@
-import type { AppStore, MenuStore, Order } from "@/types"
+import type { AppStore, MenuStore, Order, OrderType } from "@/types"
 import { fallbackToZero } from "@/utils"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -7,6 +7,7 @@ export const useStore = create(
   persist<AppStore>(
     (set) => ({
       items: {},
+      orderType: "Dining",
       editMode: false,
       editOrderId: NaN,
       addToCart: (item) =>
@@ -51,12 +52,18 @@ export const useStore = create(
           items: {},
           editMode: false,
           editOrderId: NaN,
+          orderType: "Dining",
         })),
       replaceCart: (order: Order) =>
         set(() => ({
           items: { ...order.items },
+          orderType: order.type || "Dining",
           editMode: true,
           editOrderId: order.orderId,
+        })),
+      setOrderType: (type: OrderType) =>
+        set(() => ({
+          orderType: type,
         })),
     }),
     { name: "cart-state" }
