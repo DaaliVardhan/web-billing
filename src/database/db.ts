@@ -10,7 +10,7 @@ const db = new Dexie("OrderDB") as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  order: "++orderId, items, quantity, totalPrice, createdAt, updatedAt",
+  order: "++orderId, items, quantity, totalPrice, type, createdAt, updatedAt",
   menu: "id, name, order, category, type, price, status, createdAt, updatedAt",
 })
 

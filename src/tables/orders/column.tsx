@@ -26,6 +26,16 @@ export const columns = columnHelper.columns([
       )
     },
   }),
+  columnHelper.accessor("type", {
+    header: "Type",
+    cell: ({ row }) => {
+      return (
+        <div className="text-left font-medium">
+          {row.getValue("type") || "Dining"}
+        </div>
+      )
+    },
+  }),
   columnHelper.accessor("quantity", {
     header: "Quantity",
   }),
