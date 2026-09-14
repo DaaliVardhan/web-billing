@@ -87,7 +87,7 @@ const Footer = () => {
                 <DialogDescription></DialogDescription>
               </DialogHeader>
               <OrderForm />
-              <DialogFooter>
+              <DialogFooter className="flex-col">
                 <div className="mr-auto flex flex-col">
                   <span className="font-medium">
                     Quantity:{" "}
@@ -105,23 +105,25 @@ const Footer = () => {
                     </p>
                   </span>
                 </div>
-                <DialogClose asChild>
-                  <Button
-                    variant="outline"
-                    onClick={() => setOpenDialog(false)}
-                  >
-                    Close
-                  </Button>
-                </DialogClose>
-                <DialogClose asChild>
-                  <Button
-                    type="submit"
-                    disabled={totalItems === 0}
-                    onClick={handleSave}
-                  >
-                    {editMode ? "Update" : "Save"}
-                  </Button>
-                </DialogClose>
+                <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-around">
+                  <DialogClose asChild>
+                    <Button
+                      variant="outline"
+                      onClick={() => setOpenDialog(false)}
+                    >
+                      Close
+                    </Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button
+                      type="submit"
+                      disabled={totalItems === 0}
+                      onClick={handleSave}
+                    >
+                      {editMode ? "Update" : "Save"}
+                    </Button>
+                  </DialogClose>
+                </div>
               </DialogFooter>
             </DialogContent>
           </form>
