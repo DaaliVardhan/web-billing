@@ -1,6 +1,7 @@
 import { createHashRouter } from "react-router"
 import React from "react"
 
+/* eslint-disable react-refresh/only-export-components */
 const LazyApp = React.lazy(() => import("./pages/App"))
 const LazyOrders = React.lazy(() => import("./pages/Orders"))
 const LazyMenuPage = React.lazy(() => import("./pages/Menu"))
