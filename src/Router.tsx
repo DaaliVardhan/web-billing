@@ -1,34 +1,37 @@
 import { createHashRouter } from "react-router"
-import SplashScreen from "./pages/SplashScreen"
-import App from "./pages/App"
-import Orders from "./pages/Orders"
-import ErrorPage from "./pages/ErrorPage"
-import SomethingWentWrong from "./pages/SomethingWentWrong"
-import MenuPage from "./pages/Menu"
+import React from "react"
+
+const LazyApp = React.lazy(() => import("./pages/App"))
+const LazyOrders = React.lazy(() => import("./pages/Orders"))
+const LazyMenuPage = React.lazy(() => import("./pages/Menu"))
+const LazySplashScreen = React.lazy(() => import("./pages/SplashScreen"))
+const LazyErrorPage = React.lazy(() => import("./pages/ErrorPage"))
+const LazySomethingWentWrong = React.lazy(() => import("./pages/SomethingWentWrong"))
+
 
 export const router = createHashRouter([
   {
     path: "/",
     index: true,
-    element: <SplashScreen />,
+    element: <LazySplashScreen />,
   },
   {
     path: "/home",
-    element: <App />,
-    errorElement: <SomethingWentWrong />,
+    element: <LazyApp />,
+    errorElement: <LazySomethingWentWrong />,
   },
   {
     path: "/orders",
-    element: <Orders />,
-    errorElement: <SomethingWentWrong />,
+    element: <LazyOrders />,
+    errorElement: <LazySomethingWentWrong />,
   },
   {
     path: "/menus",
-    element: <MenuPage />,
-    errorElement: <SomethingWentWrong />,
+    element: <LazyMenuPage />,
+    errorElement: <LazySomethingWentWrong />,
   },
   {
     path: "*",
-    element: <ErrorPage />,
+    element: <LazyErrorPage />,
   },
 ])
