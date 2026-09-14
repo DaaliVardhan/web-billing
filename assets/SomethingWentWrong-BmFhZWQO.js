@@ -1,0 +1,1 @@
+import{p as e}from"./index-DRp-bMNi.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`SomethingWentWrong`});export{n as default};
