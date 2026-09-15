@@ -44,7 +44,7 @@ const MenuForm = () => {
         <Input
           id="menu-name"
           name="menuName"
-          maxLength={30}
+          maxLength={50}
           required
           value={menuStored.name || ""}
           disabled={deleteMode} 
