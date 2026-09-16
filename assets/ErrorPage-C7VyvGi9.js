@@ -1,1 +1,0 @@
-import{p as e}from"./index-BJRTaXaU.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`404 Not found`});export{n as default};
