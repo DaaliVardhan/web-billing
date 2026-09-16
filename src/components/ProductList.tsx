@@ -20,7 +20,9 @@ const ProductList = ({ query, selectedMenu }: ProductListProps) => {
           ? items.filter(
               (item) =>
                 selectedMenu === "all" ||
-                item.category.toLowerCase() === selectedMenu
+                item.category.toLowerCase() === selectedMenu ||
+                (item.type.toLowerCase() === selectedMenu &&
+                  item.category.toLowerCase() === "shawarma")
             )
           : items
         ).map((item) => <Card key={item.id} item={item} />)}

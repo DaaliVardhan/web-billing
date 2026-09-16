@@ -1,26 +1,30 @@
 export const menus = [
   {
-    id: 'all',
+    id: "all",
     name: "All",
   },
   {
-    id: 'shawarma',
+    id: "shawarma",
     name: "Shawarma",
   },
   {
-    id: 'bowls',
+    id: "veg",
+    name: "Veg Shawarma",
+  },
+  {
+    id: "bowls",
     name: "Bowls",
   },
   {
-    id: 'fries',
+    id: "fries",
     name: "Fries",
   },
   {
-    id: 'drinks',
+    id: "drinks",
     name: "Drinks",
   },
   {
-    id: 'add-ons',
+    id: "add-ons",
     name: "Add-on",
-  }
-];
+  },
+]
