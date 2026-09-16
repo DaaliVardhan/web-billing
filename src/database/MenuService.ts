@@ -56,3 +56,18 @@ export const deleteMenu = async (menuId: string) => {
     console.error(error)
   }
 }
+
+export const reorderMenus = async (orderedMenus: Menu[]) => {
+  try {
+    const menus = await db.menu.bulkGet(orderedMenus.map((menu) => menu.id))
+    const updatedMenus = menus.map((menu, index) => ({
+      ...menu,
+      order: index,
+      updatedAt: new Date(),
+    } as Menu)).filter(Boolean)
+    await db.menu.bulkPut(updatedMenus)
+  } catch (error) {
+    toast("Menus reorder failed", { position: "top-right" })
+    console.error(error)
+  }
+} 

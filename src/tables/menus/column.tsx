@@ -3,10 +3,17 @@ import { type DataTableFeatures } from "@/utils/data-table-features"
 import type { Menu } from "@/types"
 import SwitchToggle from "./SwitchToggle"
 import { ActionDropDown } from "./ActionDropDown"
+import { DragHandle } from "./DragHandle"
+
 
 const columnHelper = createColumnHelper<DataTableFeatures, Menu>()
 
 export const columns = columnHelper.columns([
+  columnHelper.display({
+    id: "drag",
+    header: () => null,
+    cell: ({ row }) => <DragHandle id={row.original?.id} />,
+  }),
   columnHelper.accessor("id", {
     header: "Menu Id",
   }),

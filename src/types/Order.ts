@@ -1,6 +1,6 @@
 import type { Item } from "./Item";
 
-export type OrderType = "Dining" | "Takeaway" | "Delivery";
+export type OrderType = "Dining" | "Takeaway" | "Zomato";
 
 export interface Order {
     orderId: number,

@@ -12,14 +12,15 @@ import {
 } from "@/components/ui/dialog"
 
 import { db } from "@/database/db"
-import { saveMenu, editMenu, deleteMenu } from "@/database/MenuService"
-import { DataTable } from "@/tables/data-table"
+import { saveMenu, editMenu, deleteMenu, reorderMenus } from "@/database/MenuService"
+import { DataTable } from "@/tables/menus/data-table"
 import { columns } from "@/tables/menus/column"
 import { useMenuStore } from "@/zustand/state"
 import { useLiveQuery } from "dexie-react-hooks"
-import { Plus } from "lucide-react"
+import { Plus, RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Layout from "./Layout"
+import type { Menu } from "@/types"
 
 const MenuPage = () => {
   const menus = useLiveQuery(() => db.menu.orderBy("order").toArray())
@@ -75,6 +76,10 @@ const MenuPage = () => {
     return "Save"
   }
 
+  const setReorderData = async (reorderedMenus: Menu[]) => {
+   return await reorderMenus(reorderedMenus)
+  }
+
   return (
     <Layout>
       <div className="container mx-auto py-10 px-4">
@@ -116,8 +121,7 @@ const MenuPage = () => {
             </DialogContent>
           </form>
         </Dialog>
-
-        {menus && <DataTable columns={columns} data={menus!} />}
+        {menus && <DataTable columns={columns} initialData={menus!} setReorderData={setReorderData} />}
       </div>
     </Layout>
   )

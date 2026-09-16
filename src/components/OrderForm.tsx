@@ -42,8 +42,8 @@ const OrderForm = () => {
               <Label htmlFor="takeaway">Takeaway</Label>
             </div>
             <div className="flex items-center gap-2">
-              <RadioGroupItem value="Delivery" id="delivery" />
-              <Label htmlFor="delivery">Delivery</Label>
+              <RadioGroupItem value="Zomato" id="zomato" />
+              <Label htmlFor="zomato">Zomato</Label>
             </div>
           </RadioGroup>
         </div>
