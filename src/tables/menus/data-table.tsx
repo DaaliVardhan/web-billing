@@ -28,12 +28,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import type { DataTableFeatures } from "@/utils/data-table-features"
 import type { Menu } from "@/types/Menu"
-import { features } from "@/utils/data-table-features"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { type ColumnDef, type RowData } from "@tanstack/react-table"
+import { type ColumnDef } from "@tanstack/react-table"
 import { useId, useMemo, useState } from "react"
+import { features, type DataTableFeatures } from "@/utils/data-table-features"
 
 function DraggableRow({ row }: { row: Row<DataTableFeatures, Menu> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
@@ -59,16 +58,16 @@ function DraggableRow({ row }: { row: Row<DataTableFeatures, Menu> }) {
   )
 }
 
-interface DataTableProps<Menu extends RowData> {
+interface DataTableProps {
   columns: ColumnDef<DataTableFeatures, Menu>[]
   initialData: Menu[]
   setReorderData?: (reorderedData: Menu[]) => void
 }
-export function DataTable<Menu extends RowData>({
+export function DataTable({
   columns,
   initialData,
   setReorderData,
-}: DataTableProps<Menu>) {
+}: DataTableProps) {
   const [data, setData] = useState<Menu[]>(() => initialData)
   const sortableId = useId()
   const sensors = useSensors(
@@ -101,7 +100,7 @@ export function DataTable<Menu extends RowData>({
         const oldIndex = dataIds.indexOf(active.id)
         const newIndex = dataIds.indexOf(over.id)
         const reorderedData = arrayMove(data, oldIndex, newIndex)
-        setReorderData?.(reorderedData as Menu[])
+        setReorderData?.(reorderedData)
         return reorderedData
       })
     }
