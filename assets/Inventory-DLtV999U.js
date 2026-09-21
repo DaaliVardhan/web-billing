@@ -1,0 +1,1 @@
+import{t as e}from"./Layout-CC2kJtX9.js";import{r as t}from"./index-B3ERCM5A.js";var n=t(),r=()=>(0,n.jsx)(e,{children:(0,n.jsx)(`div`,{children:`Inventory`})});export{r as default};
