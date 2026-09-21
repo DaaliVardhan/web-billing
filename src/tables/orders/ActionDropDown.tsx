@@ -11,7 +11,6 @@ import { deleteOrder } from "@/database/OrderService"
 import { useStore } from "@/zustand/state"
 import type { Order } from "@/types"
 import { useNavigate } from "react-router"
-
 interface ActionDropDownProps {
   order: Order
 }
@@ -37,9 +36,16 @@ export const ActionDropDown = ({ order }: ActionDropDownProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={handleEditOrder}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleEditOrder} className="cursor-pointer">
+          Edit
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleDeleteOrder}>Delete</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={handleDeleteOrder}
+          className="cursor-pointer text-destructive"
+        >
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

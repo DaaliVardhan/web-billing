@@ -1,35 +1,39 @@
 import { useDeferredValue, useState } from "react"
 import ProductList from "@/components/ProductList"
 import Footer from "@/components/Footer"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { menus } from "@/seed"
 import Layout from "./Layout"
+import { useLiveQuery } from "dexie-react-hooks"
+import { db } from "@/database/db"
+import { DataTable } from "@/tables/data-table"
+import { columns } from "@/tables/orders/column"
+import ToggleFilter from "@/components/ToggleFilter"
+import Cart from "@/components/Cart"
 
 function App() {
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null)
   const [search, setSearch] = useState<string>("")
   const query = useDeferredValue(search)
+  const orders = useLiveQuery(() =>
+    db.order.orderBy("orderId").reverse().limit(10).toArray()
+  )
+
+  const onToggleSelect = (menuId: string) => {
+    setSelectedMenu((prev) => (prev === menuId ? null : menuId))
+  }
 
   return (
     <Layout setSearch={(val) => setSearch(val)}>
-      <div className="flex flex-row items-center justify-start gap-2 p-2 sm:p-4 lg:p-4 w-full overflow-x-auto">
-        <ToggleGroup variant="outline" type="single" defaultValue="all">
-          {menus.map((menu) => (
-            <ToggleGroupItem
-              key={menu.id}
-              value={menu.id}
-              aria-label={`Toggle ${menu}`}
-              onClick={() =>
-                setSelectedMenu((prev) => (prev === menu.id ? null : menu.id))
-              }
-            >
-              {menu.name}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+      <div className="flex w-full flex-col justify-between gap-4 overflow-x-auto p-2 sm:p-4 xl:w-1/2 lg:flex-row items-center lg:p-4">
+        <ToggleFilter onToggleSelect={onToggleSelect} />
+        <Cart />
       </div>
-      <main className="flex h-full min-h-0 flex-1 overflow-y-auto">
-        <ProductList query={query} selectedMenu={selectedMenu} />
+      <main className="flex min-h-0 flex-1">
+        <div className="flex w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4">
+          <ProductList query={query} selectedMenu={selectedMenu} />
+        </div>
+        <div className="hidden w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 xl:flex lg:p-4">
+          {orders && <DataTable columns={columns} data={orders} />}
+        </div>
       </main>
       <Footer />
     </Layout>

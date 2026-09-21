@@ -131,3 +131,20 @@
     @apply font-sans;
     }
 }
+
+.cart {
+  position: relative;
+}
+
+.cart::after {
+  content: attr(data-cart-items);
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: var(--secondary);
+  color: var(--destructive);
+  border-radius: 9999px;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}

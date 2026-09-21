@@ -18,9 +18,9 @@ export const saveMenu = async (menu: Partial<Menu>) => {
       createdAt: new Date(),
       updatedAt: new Date(),
     })
-    toast("Menu saved successfully", { position: "top-right" })
+    toast("Menu saved successfully", { position: "top-right", duration: 3000 })
   } catch (error) {
-    toast("Menu failed successfully", { position: "top-right" })
+    toast("Menu failed successfully", { position: "top-right", duration: 3000 })
     console.error(error)
   }
 }
@@ -40,9 +40,9 @@ export const editMenu = async (menuId: string, updatedMenu: Partial<Menu>) => {
       ...updatedMenu,
       updatedAt: new Date(),
     })
-    toast("Menu updated successfully", { position: "top-right" })
+    toast("Menu updated successfully", { position: "top-right", duration: 3000 })
   } catch (error) {
-    toast("Menu updated failed", { position: "top-right" })
+    toast("Menu updated failed", { position: "top-right", duration: 3000 })
     console.error(error)
   }
 }
@@ -50,9 +50,9 @@ export const editMenu = async (menuId: string, updatedMenu: Partial<Menu>) => {
 export const deleteMenu = async (menuId: string) => {
   try {
     await db.menu.delete(menuId)
-    toast("Menu deleted successfully", { position: "top-right" })
+    toast("Menu deleted successfully", { position: "top-right", duration: 3000 })
   } catch (error) {
-    toast("Menu deleted failed", { position: "top-right" })
+    toast("Menu deleted failed", { position: "top-right", duration: 3000 })
     console.error(error)
   }
 }
@@ -67,7 +67,7 @@ export const reorderMenus = async (orderedMenus: Menu[]) => {
     } as Menu)).filter(Boolean)
     await db.menu.bulkPut(updatedMenus)
   } catch (error) {
-    toast("Menus reorder failed", { position: "top-right" })
+    toast("Menus reorder failed", { position: "top-right", duration: 3000 })
     console.error(error)
   }
 } 
