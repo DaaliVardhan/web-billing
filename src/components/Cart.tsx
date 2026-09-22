@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Edit, Plus } from "lucide-react"
+import { Edit, Plus, RotateCcw } from "lucide-react"
 import { useState } from "react"
 import OrderForm from "./OrderForm"
 
@@ -35,6 +35,7 @@ const Cart = () => {
       0
     )
   )
+  const buttonDisabled = totalItems === 0
 
   const handleSave = () => {
     try {
@@ -49,7 +50,7 @@ const Cart = () => {
     }
   }
   return (
-    <div className="flex items-center justify-between gap-2">
+    <div className="flex flex-1 items-center justify-start gap-2">
       <div className="flex gap-2">
         <span className="font-medium text-primary">
           {totalPrice.toLocaleString("en-US", {
@@ -63,8 +64,8 @@ const Cart = () => {
           <DialogTrigger asChild>
             <Button
               variant="default"
-              disabled={totalItems === 0}
-              data-cart-items={totalItems > 0 ? totalItems : ''}
+              disabled={buttonDisabled}
+              data-cart-items={totalItems > 0 ? totalItems : ""}
               className="cart mt-4 mb-4 w-fit"
             >
               {" "}
@@ -106,7 +107,7 @@ const Cart = () => {
                 <DialogClose asChild>
                   <Button
                     type="submit"
-                    disabled={totalItems === 0}
+                    disabled={buttonDisabled}
                     onClick={handleSave}
                   >
                     {editMode ? "Update" : "Save"}
@@ -117,6 +118,14 @@ const Cart = () => {
           </DialogContent>
         </form>
       </Dialog>
+      <Button
+        variant="outline"
+        disabled={buttonDisabled}
+        onClick={() => emptyCart()}
+      >
+        <RotateCcw />
+        <span>reset</span>
+      </Button>
     </div>
   )
 }

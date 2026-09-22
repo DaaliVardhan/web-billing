@@ -1,6 +1,5 @@
 import { useDeferredValue, useState } from "react"
 import ProductList from "@/components/ProductList"
-import Footer from "@/components/Footer"
 import Layout from "./Layout"
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "@/database/db"
@@ -23,7 +22,7 @@ function App() {
 
   return (
     <Layout setSearch={(val) => setSearch(val)}>
-      <div className="flex w-full flex-col justify-between gap-4 overflow-x-auto p-2 sm:p-4 xl:w-1/2 lg:flex-row items-center lg:p-4">
+      <div className="flex w-full flex-col items-center justify-between gap-4 overflow-x-auto p-2 sm:p-4 lg:flex-row lg:p-4">
         <ToggleFilter onToggleSelect={onToggleSelect} />
         <Cart />
       </div>
@@ -31,11 +30,11 @@ function App() {
         <div className="flex w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4">
           <ProductList query={query} selectedMenu={selectedMenu} />
         </div>
-        <div className="hidden w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 xl:flex lg:p-4">
+        <div className="hidden w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4 xl:flex">
+          <h2 className="text-2xl font-bold text-primary">Recent Orders</h2>
           {orders && <DataTable columns={columns} data={orders} />}
         </div>
       </main>
-      <Footer />
     </Layout>
   )
 }
