@@ -1,1 +1,0 @@
-import{r as e}from"./index-B3ERCM5A.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`404 Not found`});export{n as default};
