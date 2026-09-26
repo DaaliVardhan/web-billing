@@ -2,10 +2,24 @@ import { createColumnHelper } from "@tanstack/react-table"
 import { type DataTableFeatures } from "@/utils/data-table-features"
 import type { Item, Order } from "@/types"
 import { ActionDropDown } from "@/tables/orders/ActionDropDown"
+import DiningIcon from "@/Icons/dining"
+import TakeawayIcon from "@/Icons/takeaway"
+import ZomatoIcon from "@/Icons/zomato"
 
+const renderIcons = (type: string) => {
+  switch (type) {
+    case "Dining":
+      return <DiningIcon />
+    case "Takeaway":
+      return <TakeawayIcon />
+    case "Zomato":
+      return <ZomatoIcon />
+    default:
+      return <p className="text-left font-medium">{type}</p>
+  }
+}
 
 const columnHelper = createColumnHelper<DataTableFeatures, Order>()
-
 
 export const columns = columnHelper.columns([
   columnHelper.accessor("orderId", {
@@ -30,8 +44,8 @@ export const columns = columnHelper.columns([
     header: "Type",
     cell: ({ row }) => {
       return (
-        <div className="text-left font-medium">
-          {row.getValue("type") || "Dining"}
+        <div className="grid max-w-[48px] justify-items-center gap-2">
+          {renderIcons(row.getValue("type") || "Dining")}
         </div>
       )
     },

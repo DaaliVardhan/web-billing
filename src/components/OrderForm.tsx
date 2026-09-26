@@ -3,6 +3,9 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useStore } from "@/zustand/state"
 import type { OrderType } from "@/types/Order"
+import DiningIcon from "@/Icons/dining"
+import TakeawayIcon from "@/Icons/takeaway"
+import ZomatoIcon from "@/Icons/zomato"
 
 const OrderForm = () => {
   const cartItems = useStore((state) => state.items)
@@ -35,15 +38,25 @@ const OrderForm = () => {
           >
             <div className="flex items-center gap-2">
               <RadioGroupItem value="Dining" id="dining" />
-              <Label htmlFor="dining">Dining</Label>
+              <Label htmlFor="dining" className="cursor-pointer">
+                <DiningIcon />
+                Dining
+              </Label>
             </div>
             <div className="flex items-center gap-2">
               <RadioGroupItem value="Takeaway" id="takeaway" />
-              <Label htmlFor="takeaway">Takeaway</Label>
+              <Label htmlFor="takeaway" className="cursor-pointer">
+                <TakeawayIcon />
+                Takeaway
+              </Label>
             </div>
             <div className="flex items-center gap-2">
               <RadioGroupItem value="Zomato" id="zomato" />
-              <Label htmlFor="zomato">Zomato</Label>
+              <Label htmlFor="zomato" className="cursor-pointer">
+                <div className="grid max-w-[48px] justify-center gap-2">
+                  <ZomatoIcon />
+                </div>
+              </Label>
             </div>
           </RadioGroup>
         </div>
