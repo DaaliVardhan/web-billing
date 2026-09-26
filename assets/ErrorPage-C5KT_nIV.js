@@ -1,0 +1,1 @@
+import{r as e}from"./index-UNnUr3ti.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`404 Not found`});export{n as default};

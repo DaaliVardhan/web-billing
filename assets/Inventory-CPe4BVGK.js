@@ -1,1 +1,0 @@
-import{t as e}from"./Layout-BYQ2MU9_.js";import{r as t}from"./index-NAMaCTcl.js";var n=t(),r=()=>(0,n.jsx)(e,{children:(0,n.jsx)(`div`,{children:`Inventory`})});export{r as default};
