@@ -1,0 +1,1 @@
+import{t as e}from"./Layout-D1ht-LBj.js";import{r as t}from"./index-OA79C3cu.js";var n=t(),r=()=>(0,n.jsx)(e,{children:(0,n.jsx)(`div`,{children:`Inventory`})});export{r as default};

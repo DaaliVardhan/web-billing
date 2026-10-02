@@ -1,0 +1,1 @@
+import{r as e}from"./index-OA79C3cu.js";var t=e(),n=()=>(0,t.jsx)(`div`,{children:`404 Not found`});export{n as default};
