@@ -27,10 +27,10 @@ function App() {
         <Cart />
       </div>
       <main className="flex min-h-0 flex-1">
-        <div className="flex w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4">
+        <div className="flex w-full flex-col flex-2 gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4">
           <ProductList query={query} selectedMenu={selectedMenu} />
         </div>
-        <div className="hidden w-full flex-col gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4 xl:flex">
+        <div className="hidden w-full flex-col flex-3 gap-2 overflow-y-auto p-2 sm:p-4 lg:p-4 xl:flex 2xl:flex-2">
           <h2 className="text-2xl font-bold text-primary">Recent Orders</h2>
           {orders && <DataTable columns={columns} data={orders} />}
         </div>

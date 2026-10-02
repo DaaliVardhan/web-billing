@@ -12,6 +12,8 @@ import {
 import { features, type DataTableFeatures } from "@/utils/data-table-features"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import ActionContextMenu from "./orders/ContextMenu"
+import type { Order } from "@/types"
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[]
@@ -49,16 +51,18 @@ export function DataTable<TData extends RowData>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    <table.FlexRender cell={cell} />
-                  </TableCell>
-                ))}
-              </TableRow>
+              <ActionContextMenu key={row.id} order={row.original as Order}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      <table.FlexRender cell={cell} />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </ActionContextMenu>
             ))
           ) : (
             <TableRow>
